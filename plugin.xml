@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+<extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="com.taobao.eclipse.plug.autotest.conrtibution"
+            nameFilter="*.java"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="com.taobao.eclipse.plug.autotest.menu1"
+               label="测试"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="com.taobao.eclipse.plug.autotest.action.GenerateSingleTestDaoClassAction"
+               enablesFor="1"
+               id="com.taobao.eclipse.plug.autotest.GenerateSingleTestDaoClassAction"
+               label="生成测试用例"
+               menubarPath="com.taobao.eclipse.plug.autotest.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+   
+   <extension
+         id="com.taobao.eclipse.plug.autotestdao.action.GenerateBatchTestDaoClassAction"
+         name="GenerateBatchTestDaoClassAction"
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="com.taobao.eclipse.plug.autotest.action.GenerateBatchTestDaoClassAction"
+            label="TestDao"
+            visible="true">
+         <action
+               class="com.taobao.eclipse.plug.autotest.action.GenerateBatchTestDaoClassAction"
+               id="com.taobao.eclipse.plug.autotest.action.GenerateBatchTestDaoClassAction"
+               label="Test"
+               style="push"
+               toolbarPath="Toolbar"
+               tooltip="Gen Test">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>

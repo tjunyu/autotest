@@ -1,0 +1,36 @@
+package ${packageStr};
+
+import static org.junit.Assert.fail;
+import javax.annotation.Resource;
+import org.junit.Test;
+#foreach( $import in $importTypes )
+import $import;
+#end
+//@ITestSpringContext({"/dal.xml"})
+//@generated=true 当重新生成的时候加上这个表示就会把这个方法重新生成，不加不会覆盖
+public class ${testClassName} #if($!baseTestClass !="")extends $!baseTestClass#end{
+
+    @ITestSpringBean
+	private ${clazz} ${p_clazz};
+
+	#foreach( $method in $methodList )
+/**
+	 * @generated
+	 */
+    @SuppressWarnings("unchecked")
+	@Test
+	public void ${method.testFuncName}() {
+		try {
+			$!{method.before_doMethod}
+			${p_clazz}.${method.name}($!{method.parameter});
+			System.out.println("===success:${p_clazz}.${method.name}===");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+			System.err.println("===fail:${p_clazz}.${method.name}===");
+		}
+	}
+	#end
+}
+
+
